@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="U83-ne-KeZ">
-                                <rect key="frame" x="20" y="69" width="390" height="856.66666666666663"/>
+                                <rect key="frame" x="20" y="69" width="390" height="829"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0R6-Gx-D9f">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="23.666666666666668"/>
@@ -58,10 +58,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-UC-kul">
-                                        <rect key="frame" x="0.0" y="648.66666666666663" width="390" height="128"/>
+                                        <rect key="frame" x="0.0" y="648.66666666666663" width="390" height="100.33333333333337"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiW-E6-Ywb" userLabel="Question Label">
-                                                <rect key="frame" x="42" y="13" width="306" height="102"/>
+                                                <rect key="frame" x="42" y="13" width="306" height="74.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
                                                 <color key="textColor" name="YP White (iOS)"/>
                                                 <nil key="highlightedColor"/>
@@ -69,14 +69,14 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="RiW-E6-Ywb" secondAttribute="bottom" constant="13" id="0q9-80-3Cn"/>
-                                            <constraint firstAttribute="trailing" secondItem="RiW-E6-Ywb" secondAttribute="trailing" constant="42" id="95D-aN-XYJ"/>
-                                            <constraint firstItem="RiW-E6-Ywb" firstAttribute="centerX" secondItem="HfI-UC-kul" secondAttribute="centerX" id="GhJ-vW-9eM"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RiW-E6-Ywb" secondAttribute="trailing" constant="42" id="95D-aN-XYJ"/>
                                             <constraint firstItem="RiW-E6-Ywb" firstAttribute="top" secondItem="HfI-UC-kul" secondAttribute="top" constant="13" id="QGf-HW-18f"/>
                                             <constraint firstItem="RiW-E6-Ywb" firstAttribute="leading" secondItem="HfI-UC-kul" secondAttribute="leading" constant="42" id="ZNx-S7-N4G"/>
+                                            <constraint firstItem="RiW-E6-Ywb" firstAttribute="centerX" secondItem="HfI-UC-kul" secondAttribute="centerX" id="yqg-p3-1Ne"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1hT-l3-QNS">
-                                        <rect key="frame" x="0.0" y="796.66666666666663" width="390" height="60"/>
+                                        <rect key="frame" x="0.0" y="769" width="390" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uB0-hv-FMG" userLabel="No button">
                                                 <rect key="frame" x="0.0" y="0.0" width="185" height="60"/>
@@ -125,6 +125,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="U83-ne-KeZ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4V4-q7-ULc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U83-ne-KeZ" secondAttribute="trailing" constant="20" id="DdB-o7-dKk"/>
                             <constraint firstItem="U83-ne-KeZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Xgf-Dg-rt5"/>
                             <constraint firstItem="U83-ne-KeZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="rDP-1l-jLk"/>
@@ -133,7 +134,9 @@
                     <connections>
                         <outlet property="counterLabel" destination="t25-jp-Dz9" id="mVZ-zi-VC8"/>
                         <outlet property="imageView" destination="jWa-Ca-aPU" id="vwq-wX-2Jq"/>
+                        <outlet property="noButton" destination="uB0-hv-FMG" id="aSp-tm-bMY"/>
                         <outlet property="textLabel" destination="RiW-E6-Ywb" id="aQd-6n-ouX"/>
+                        <outlet property="yesButton" destination="Fpo-hF-ujX" id="Nnb-52-AI7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
