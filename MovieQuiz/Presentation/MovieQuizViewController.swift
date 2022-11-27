@@ -6,13 +6,19 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
-    private var bestResult: Int = 0
-    private var gamesPlayed: Int = 1
-    private let questionsAmount: Int = 3
+//    private var bestResult: Int = 0
+//    private var gamesPlayed: Int = 1
+    private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     private var alertPresenter: AlertPresenterProtocol?
     private var resultAlert: UIAlertController?
+    private var statisticService: StatisticServiceImplementation?
+    
+    enum FileManagerError: Error {
+        case fileDoesntExist
+    }
+    
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
@@ -27,7 +33,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         questionFactory = QuestionFactory(delegate: self)
         questionFactory?.requestNextQuestion()
         
+        statisticService = StatisticServiceImplementation()
     }
+    
     
     // MARK: - QuestionFactoryDelegate
     
@@ -79,22 +87,25 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
-            if correctAnswers > bestResult { bestResult = correctAnswers }
+            statisticService?.store(correct: correctAnswers, total: questionsAmount)
             
+            guard let bestGame = statisticService?.bestGame,
+                  let totalAccuracy = statisticService?.totalAccuracy,
+                  let gamesPlayed = statisticService?.gamesCount else { return }
+                        
             let result = AlertModel(
                 title: "Раунд окончен!",
                 message: """
 Ваш результат: \(correctAnswers)/\(questionsAmount)
 Количество сыгранных квизов: \(gamesPlayed)
-Рекорд: \(bestResult)/\(questionsAmount) (03.07.22 03:22)
-Средняя точность: 60.00%
+Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
+Средняя точность: \(String(format: "%.2f", totalAccuracy))%
 """,
                 buttonText: "Сыграть еще раз",
                 completion: {[weak self] _ in
                     guard let self = self else { return }
                     self.currentQuestionIndex = 0
                     self.correctAnswers = 0
-                    self.gamesPlayed += 1
                     self.questionFactory?.requestNextQuestion()
                 })
 
@@ -108,8 +119,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     // MARK: - AlertPresenter
-    
-    
+        
     private func show(quiz result: AlertModel) {
         
         alertPresenter = AlertPresenter(result: result, delegate: self)
