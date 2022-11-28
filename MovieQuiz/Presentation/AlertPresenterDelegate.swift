@@ -1,7 +1,5 @@
 import Foundation
-import UIKit
-
 
 protocol AlertPresenterDelegate: AnyObject {
-    func didReceiveAlert(alert: UIAlertController?)
+    func didReceiveAlert(alert: AlertControllerProtocol?)
 }

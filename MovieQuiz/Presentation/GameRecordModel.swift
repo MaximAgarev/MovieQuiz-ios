@@ -5,7 +5,7 @@ struct GameRecord: Codable {
     let total: Int
     let date: Date
     
-    func isBest (bestGame: GameRecord) -> Bool {
+    func isBest(bestGame: GameRecord) -> Bool {
         return bestGame < self
     }
 }

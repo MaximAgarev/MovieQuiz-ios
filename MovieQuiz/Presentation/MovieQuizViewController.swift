@@ -6,8 +6,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
-//    private var bestResult: Int = 0
-//    private var gamesPlayed: Int = 1
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
@@ -134,9 +132,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
 
     
-    func didReceiveAlert(alert: UIAlertController?) {
+    func didReceiveAlert(alert: AlertControllerProtocol?) {
         guard let alert = alert else { return }
-        resultAlert = alert
+        resultAlert = alert as? UIAlertController
     }
 
     
