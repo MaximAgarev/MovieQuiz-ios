@@ -44,8 +44,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         
         currentQuestion = question
         let viewModel = convert(model: question)
-        DispatchQueue.main.async { [weak self] in
-                    self?.show(quiz: viewModel)
+        DispatchQueue.main.async {
+                    self.show(quiz: viewModel)
                 }
     }
     
@@ -125,8 +125,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         alertPresenter?.requestAlert()
         
         guard let resultAlert = resultAlert else { return }
-        DispatchQueue.main.async { [weak self] in
-                    self?.present(resultAlert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+                    self.present(resultAlert, animated: true, completion: nil)
                 }
         
     }
