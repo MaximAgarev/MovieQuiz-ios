@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_72" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -121,6 +120,9 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="UER-dS-beS">
+                                <rect key="frame" x="205" y="456" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -128,10 +130,13 @@
                             <constraint firstItem="U83-ne-KeZ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4V4-q7-ULc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U83-ne-KeZ" secondAttribute="trailing" constant="20" id="DdB-o7-dKk"/>
                             <constraint firstItem="U83-ne-KeZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Xgf-Dg-rt5"/>
+                            <constraint firstItem="UER-dS-beS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="de2-gR-9Ue"/>
+                            <constraint firstItem="UER-dS-beS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fxa-mF-Knv"/>
                             <constraint firstItem="U83-ne-KeZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="rDP-1l-jLk"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="UER-dS-beS" id="Rgj-CT-dis"/>
                         <outlet property="counterLabel" destination="t25-jp-Dz9" id="mVZ-zi-VC8"/>
                         <outlet property="imageView" destination="jWa-Ca-aPU" id="vwq-wX-2Jq"/>
                         <outlet property="noButton" destination="uB0-hv-FMG" id="aSp-tm-bMY"/>
