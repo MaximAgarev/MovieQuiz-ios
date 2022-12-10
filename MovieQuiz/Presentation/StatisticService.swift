@@ -37,7 +37,7 @@ final class StatisticServiceImplementation: StatisticService {
         get {
             let total = userDefaults.integer(forKey: Keys.total.rawValue)
             let correct = userDefaults.integer(forKey: Keys.correct.rawValue)
-            return Double(correct) / Double(total)
+            return (Double(correct) / Double(total)) * 100
         }
     }
     

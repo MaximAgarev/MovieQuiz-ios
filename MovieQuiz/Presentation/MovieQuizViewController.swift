@@ -25,6 +25,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.hidesWhenStopped = true
         showLoadingIndicator()
         questionFactory = QuestionFactory(delegate: self, moviesLoader: MoviesLoader())
         questionFactory?.loadData()
@@ -33,12 +34,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func showLoadingIndicator() {
-        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
     
     private func showNetworkError(message: String) {
-        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
         let error = AlertModel(
             title: "Ошибка",
             message: message,
@@ -58,6 +58,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             return
         }
         
+        activityIndicator.stopAnimating()
         currentQuestion = question
         let viewModel = convert(model: question)
         self.show(quiz: viewModel)
@@ -71,7 +72,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     func didLoadDataFromServer() {
-        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
         questionFactory?.requestNextQuestion()
     }
     
@@ -135,7 +136,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
       } else {
           currentQuestionIndex += 1
           questionFactory?.requestNextQuestion()
-          
+          showLoadingIndicator()
       }
     }
     

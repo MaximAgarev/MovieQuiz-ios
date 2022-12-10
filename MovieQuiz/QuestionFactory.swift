@@ -1,5 +1,18 @@
 import Foundation
 
+enum ImdbError: Error {
+    case errorMessage(String)
+}
+
+extension ImdbError: LocalizedError {
+    public var errorDescription: String? {
+            switch self {
+            case .errorMessage(let text):
+                return NSLocalizedString(text, comment: "IMDB returns error")
+            }
+        }
+}
+
 class QuestionFactory: QuestionFactoryProtocol {
     
     //    private let questions: [QuizQuestion] = [
@@ -56,6 +69,11 @@ class QuestionFactory: QuestionFactoryProtocol {
             guard let self = self else { return }
                 switch result {
                 case .success(let mostPopularMovies):
+                    if mostPopularMovies.errorMessage != "" {
+                        let error = ImdbError.errorMessage(mostPopularMovies.errorMessage)
+                        self.delegate?.didFailToLoadData(with: error)
+                        return
+                    }
                     self.movies = mostPopularMovies.items
                     self.delegate?.didLoadDataFromServer()
                 case .failure(let error):
@@ -77,7 +95,9 @@ class QuestionFactory: QuestionFactoryProtocol {
            do {
                imageData = try Data(contentsOf: movie.resizedImageURL)
             } catch {
-                print("Failed to load image")
+                let error = ImdbError.errorMessage("Failed to load image")
+                self.delegate?.didFailToLoadData(with: error)
+                return
             }
             
             let rating = Float(movie.rating) ?? 0
