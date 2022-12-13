@@ -9,22 +9,25 @@ protocol MovieQuizViewControllerProtocol: AnyObject {
     func showLoadingIndicator()
     func hideLoadingIndicator()
     
+    func enabledButtons(isEnabled: Bool)
+    
     func showNetworkError(message: String)
 }
 
 
 final class MovieQuizPresenter: QuestionFactoryDelegate {
+    private weak var viewController: MovieQuizViewControllerProtocol?
     
-    private let questionsAmount: Int = 10
-    private var correctAnswers: Int = 0
     private var questionFactory: QuestionFactoryProtocol?
+    private let questionsAmount: Int = 10
     private var currentQuestionIndex: Int = 0
     private var currentQuestion: QuizQuestion?
-    weak var viewController: MovieQuizViewController?
+
     private let statisticService: StatisticService
+    private var correctAnswers: Int = 0
     
     init(viewController: MovieQuizViewControllerProtocol) {
-        self.viewController = viewController as? MovieQuizViewController
+        self.viewController = viewController
         
         statisticService = StatisticServiceImplementation()
         
@@ -112,13 +115,13 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             let result = AlertModel(
                 title: "Раунд окончен!",
                 message: """
-Ваш результат: \(correctAnswers)/\(questionsAmount)
-Количество сыгранных квизов: \(gamesPlayed)
-Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
-Средняя точность: \(String(format: "%.2f", totalAccuracy))%
-""",
+                Ваш результат: \(correctAnswers)/\(questionsAmount)
+                Количество сыгранных квизов: \(gamesPlayed)
+                Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
+                Средняя точность: \(String(format: "%.2f", totalAccuracy))%
+                """,
                 buttonText: "Сыграть еще раз",
-                completion: {[weak self] _ in
+                completion: { [weak self] _ in
                     guard let self = self else { return }
                     
                     self.restartGame()

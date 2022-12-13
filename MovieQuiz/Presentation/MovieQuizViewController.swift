@@ -23,8 +23,6 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
         showLoadingIndicator()
         
         presenter = MovieQuizPresenter(viewController: self)
-        
-//        statisticService = StatisticServiceImplementation()
     }
     
     func showLoadingIndicator() {
